@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use App\User;
+use Illuminate\Support\Str;
 
 class FirstTest extends TestCase
 {
@@ -13,6 +15,14 @@ class FirstTest extends TestCase
      */
     public function testExample()
     {
-        $this->assertTrue(false);
+        $newEmail = Str::random(10).'@maisl.com';
+        $response = $this->post('/register',[
+            'name'=> 'thirdd',
+            'email'=> $newEmail,
+            'password'=> '11111111',
+            'password_confirmation'=> '11111111'
+        ]);
+        $response->assertStatus(302);
+        $this->assertTrue((bool)User::where(['email'=>$newEmail])->count());
     }
 }
