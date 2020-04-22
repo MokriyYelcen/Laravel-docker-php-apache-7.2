@@ -20,11 +20,11 @@
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
-        <server name="CACHE_DRIVER" value="file"/>
+        <server name="CACHE_DRIVER" value="redis"/>
         <server name="DB_CONNECTION" value="mysql"/>
         <server name="DB_DATABASE" value="testLaraIndockerEnv"/>
         <server name="MAIL_DRIVER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
-        <server name="SESSION_DRIVER" value="file"/>
+        <server name="SESSION_DRIVER" value="database"/>
     </php>
 </phpunit>
