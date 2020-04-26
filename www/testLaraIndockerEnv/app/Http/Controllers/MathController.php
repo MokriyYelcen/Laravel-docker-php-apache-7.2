@@ -1,31 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
-use Mockery\Exception;
-use App\{User,Session};
-use Illuminate\Support\Facades\Auth;
 
-
-class TestController extends Controller
+class MathController extends Controller
 {
-    public function index()
-    {
-        //Auth::user()->id
-//        return response()->json(unserialize(base64_decode(Session::where('user_id',Auth::user()->id)->first()->payload)));
-//        $password = Hash::info(Auth::user()->password);
-
-//        return response()->json($this->eq_roots(1,-2,-3));
-
-        return response()->json($this->eq_roots(0,0,15));
-//        return response()->json($this->eq_roots(1,12,36));
-    }
     public function eq_roots($a = 0,$b = 0 ,$c = 0) {
 
         if ($a == 0) {
-            if( $b == 0 && $c == 0)return [0,0];else return [false,false];
+            if( $b == 0 && $c == 0)return [0,0];else throw new \Exception('invalid equation');
         }
 
         if ($b==0) {
@@ -51,5 +35,12 @@ class TestController extends Controller
             }
         }
         return array($x1, $x2);
+    }
+
+    public function getThirdSide ($a,$b,$alpha){
+        if($alpha <= 0 || $alpha >=180){
+            return false;
+        }
+        return sqrt(($a*$a) + ($b*$b) - (2*$a*$b * cos($alpha)));
     }
 }
